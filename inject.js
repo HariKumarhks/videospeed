@@ -27,8 +27,21 @@ function toggleNewtab() {
 var regStrip = /^[\r\t\f\v ]+|[\r\t\f\v ]+$/gm;
 var regEndsWithFlags = /\/(?!.*(.).*\1)[gimsuy]*$/;
 
+function getWebsiteName() {
+  const { hostname, host } = window.location;
+
+  if (
+    hostname === "localhost" ||
+    hostname === "127.0.0.1" ||
+    hostname.endsWith(".localhost")
+  ) {
+    return host;
+  }
+  return hostname.split(".")[1];
+}
+
 // changed here
-const WEBSITES_NAME = location.hostname.split(".")[1];
+const WEBSITES_NAME = getWebsiteName();
 
 var tc = {
   settings: {
@@ -970,7 +983,7 @@ function runAction(action, value, e) {
     showController(controller);
 
     // Changed Here ...
-    const skip_websites = ["netflix"];
+    const skip_websites = ["netflix", "localhost:9777"]; // React Video Player
     const already_includes_websites = ["youtube"];
 
     if (!the_video.classList.contains("vsc-cancelled")) {
@@ -994,7 +1007,7 @@ function runAction(action, value, e) {
         }, 0);
       } else if (action === "advance") {
         if (skip_websites.includes(WEBSITES_NAME)) {
-          log("Forbidden site to skip, so don't want to mess with it", 5);
+          // log("Forbidden site to skip, so don't want to mess with it", 5);
           // console.log("Forbidden site to skip, so don't want to mess with it");
           // Forbidden site to skip, shows error/double skip when using this feature
           return;
