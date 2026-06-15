@@ -359,8 +359,8 @@ function defineVideoController() {
         </style>
 
         <div id="controller" style="top:${top}; left:${left}; opacity:${
-      tc.settings.controllerOpacity
-    }">
+          tc.settings.controllerOpacity
+        }">
           <span data-action="drag" class="draggable">${speed}</span>
           <span id="controls">
             <button data-action="rewind" class="rw">«</button>
@@ -983,7 +983,8 @@ function runAction(action, value, e) {
         if (already_includes_websites.includes(WEBSITES_NAME)) {
           // console.log("Forbidden site to skip, so don't want to mess with it");
           // Forbidden site to skip, shows error/double skip when using this feature
-          value -= 5;
+          // value -= 5;
+          return;
         }
 
         log("Rewind", 5);
@@ -1001,7 +1002,8 @@ function runAction(action, value, e) {
         if (already_includes_websites.includes(WEBSITES_NAME)) {
           // console.log("Forbidden site to skip, so don't want to mess with it");
           // Forbidden site to skip, shows error/double skip when using this feature
-          value -= 5;
+          // value -= 5;
+          return;
         }
         log("Fast forward", 5);
         // Changed Here ...
