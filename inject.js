@@ -1002,6 +1002,9 @@ function runAction(action, value, e) {
 
         log("Rewind", 5);
         // Changed Here ...
+        if (value === 0) {
+          return;
+        }
         setTimeout(() => {
           the_video.currentTime -= value;
         }, 0);
@@ -1018,6 +1021,9 @@ function runAction(action, value, e) {
           // value -= 5;
           return;
         }
+        if (value === 0) {
+          return;
+        }
         log("Fast forward", 5);
         // Changed Here ...
         setTimeout(() => {
@@ -1032,6 +1038,11 @@ function runAction(action, value, e) {
           16
         );
         setSpeed(the_video, s);
+         // Prevents the website's JS from seeing the event
+        event.stopImmediatePropagation();
+
+        // Prevents default browser actions if necessary
+        event.preventDefault();
       } else if (action === "slower") {
         log("Decrease speed", 5);
         // Video min rate is 0.0625:
